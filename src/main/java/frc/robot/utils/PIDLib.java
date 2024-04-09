@@ -15,7 +15,7 @@ public class PIDLib {
     private static final String KP_KEY = "kp";
     private static final String KI_KEY = "ki";
     private static final String KD_KEY = "kd";
-    private static final double STORE_THRESHOLD = 0.5; //ERROR THRESHOLD FOR STORING TUNE CONSTANTS
+    private static final double STORE_THRESHOLD = 0.5; //ERROR THRESHOLD FOR STORING TUNE CONSTANTS (IF ITS WITHIN HALF A DEGREE)
 
     private boolean parametersStored = false;
     private double storedKp;
