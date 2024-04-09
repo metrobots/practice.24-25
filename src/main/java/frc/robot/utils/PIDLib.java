@@ -45,9 +45,9 @@ public class PIDLib {
         double errorRanged = error/900; //MAKE A ERROR OF 90 (PROB DEGREES) EQUAL A CHANGE OF 0.01
 
         //PROPORTIONAL TUNING
-        kp += 0.01 + errorRanged; //ADJUST PROPORTIONALLY
-        ki += 0.001 + errorRanged; //ADJUST PROPORTIONALLY (SMALLER FACTOR)
-        kd -= 0.005 + errorRanged; //ADJUST INVERSE PROPORTIONALLY
+        kp += 0.00 + errorRanged; //ADJUST PROPORTIONALLY
+        ki += 0.000 + errorRanged; //ADJUST PROPORTIONALLY (SMALLER FACTOR)
+        kd -= 0.000 + errorRanged; //ADJUST INVERSE PROPORTIONALLY
 
         //UPDATE PID CONSTANTS
         pidController.setPID(kp, ki, kd);
