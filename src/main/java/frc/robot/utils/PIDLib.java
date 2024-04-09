@@ -15,7 +15,7 @@ public class PIDLib {
     private static final String KP_KEY = "kp";
     private static final String KI_KEY = "ki";
     private static final String KD_KEY = "kd";
-    private static final double STORE_THRESHOLD = 0.1; //ERROR THRESHOLD FOR STORING TUNE CONSTANTS
+    private static final double STORE_THRESHOLD = 0.5; //ERROR THRESHOLD FOR STORING TUNE CONSTANTS
 
     private boolean parametersStored = false;
     private double storedKp;
@@ -41,15 +41,13 @@ public class PIDLib {
         }
 
         //CALCULATE ERROR 
-        double error = setpoint - measurement;
-
-        //CLAMP ERROR
-        error = Math.max(Math.min(error, 1.0), -1.0);
+        double error = setpoint - measurement; //CALCULATE THE ERROR BY FINDING HOW FAR AWAY WE ARE FROM WHERE WE WANT TO BE
+        double errorRanged = error/900; //MAKE A ERROR OF 90 (PROB DEGREES) EQUAL A CHANGE OF 0.01
 
         //PROPORTIONAL TUNING
-        kp += 0.01 * error; //ADJUST PROPORTIONALLY
-        ki += 0.001 * error; //ADJUST PROPORTIONALLY (SMALLER FACTOR)
-        kd -= 0.005 * error; //ADJUST INVERSE PROPORTIONALLY
+        kp += 0.01 + errorRanged; //ADJUST PROPORTIONALLY
+        ki += 0.001 + errorRanged; //ADJUST PROPORTIONALLY (SMALLER FACTOR)
+        kd -= 0.005 + errorRanged; //ADJUST INVERSE PROPORTIONALLY
 
         //UPDATE PID CONSTANTS
         pidController.setPID(kp, ki, kd);
