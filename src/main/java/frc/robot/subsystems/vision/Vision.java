@@ -4,92 +4,56 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.utils.LimelightLib;
 
 public class Vision extends SubsystemBase {
 
-public static String aLN = "arm";
-public static String fLN = "front";
+public static String limelight = "limelight";
 
-//OK SO GUYS IF SOMETHING IS MARKED WITH AN A_ THAT MEANS THAT ITS FROM THE ARM LIMELIGHT
-//IF ITS FROM THE INTAKE/FROM LIMELIGHT IT IS MARKED WITH A F_
+
+//OK SO GUYS IF SOMETHING IS MARKED WITH AN  THAT MEANS THAT ITS FROM THE ARM LIMELIGHT
 
 //COORDINATE VALUE GETTERS
-public static double a_tX = LimelightLib.getTX(aLN);
-public static double a_tY = LimelightLib.getTY(aLN);
-public static double a_tA = LimelightLib.getTA(aLN);
-public static boolean a_tV = LimelightLib.getTV(aLN);
-
-public static double f_tX = LimelightLib.getTX(fLN);
-public static double f_tY = LimelightLib.getTY(fLN);
-public static double f_tA = LimelightLib.getTA(fLN);
-public static boolean f_tV = LimelightLib.getTV(fLN);
+public static double tX = LimelightLib.getTX(limelight);
+public static double tY = LimelightLib.getTY(limelight);
+public static double tA = LimelightLib.getTA(limelight);
+public static boolean tV = LimelightLib.getTV(limelight);
 
 //ROBOT POSE GETTERS 
 //3D
-public static Pose3d a_botPose3d = LimelightLib.getBotPose3d(aLN);
-public static double[] a_botPoseTargetSpace = LimelightLib.getBotPose_TargetSpace(aLN);
-public static double[] a_botPose3dBlue = LimelightLib.getBotPose_wpiBlue(aLN);
-public static double[] a_botPose3dRed = LimelightLib.getBotPose_wpiRed(aLN);
+public static Pose3d botPose3d = LimelightLib.getBotPose3d(limelight);
+public static double[] botPoseTargetSpace = LimelightLib.getBotPose_TargetSpace(limelight);
+public static double[] botPose3dBlue = LimelightLib.getBotPose_wpiBlue(limelight);
+public static double[] botPose3dRed = LimelightLib.getBotPose_wpiRed(limelight);
 
-public static Pose3d f_botPose3d = LimelightLib.getBotPose3d(fLN);
-public static double[] f_botPoseTargetSpace = LimelightLib.getBotPose_TargetSpace(fLN);
-public static double[] f_botPose3dBlue = LimelightLib.getBotPose_wpiBlue(fLN);
-public static double[] f_botPose3dRed = LimelightLib.getBotPose_wpiRed(fLN);
 //2D
-public static double[] a_botPose = LimelightLib.getBotPose(aLN);
-public static Pose2d a_botPose2d = LimelightLib.getBotPose2d(aLN);
-public static Pose2d a_botPose2dBlue = LimelightLib.getBotPose2d_wpiBlue(aLN);
-public static Pose2d a_botPose2dRed = LimelightLib.getBotPose2d_wpiRed(aLN);
-
-public static double[] f_botPose = LimelightLib.getBotPose(fLN);
-public static Pose2d f_botPose2d = LimelightLib.getBotPose2d(fLN);
-public static Pose2d f_botPose2dBlue = LimelightLib.getBotPose2d_wpiBlue(fLN);
-public static Pose2d f_botPose2dRed = LimelightLib.getBotPose2d_wpiRed(fLN);
+public static double[] botPose = LimelightLib.getBotPose(limelight);
+public static Pose2d botPose2d = LimelightLib.getBotPose2d(limelight);
+public static Pose2d botPose2dBlue = LimelightLib.getBotPose2d_wpiBlue(limelight);
+public static Pose2d botPose2dRed = LimelightLib.getBotPose2d_wpiRed(limelight);
 
 //CAMERA POSE GETTERS
-public static Pose3d a_camPoseRobotSpace = LimelightLib.getCameraPose3d_RobotSpace(aLN);
-public static Pose3d a_camPose3dRobotSpace = LimelightLib.getCameraPose3d_TargetSpace(aLN);
-public static double[] a_camPose2dRobotSpace = LimelightLib.getCameraPose_TargetSpace(aLN);
-
-public static Pose3d f_camPoseRobotSpace = LimelightLib.getCameraPose3d_RobotSpace(fLN);
-public static Pose3d f_camPose3dRobotSpace = LimelightLib.getCameraPose3d_TargetSpace(fLN);
-public static double[] f_camPose2dRobotSpace = LimelightLib.getCameraPose_TargetSpace(fLN);
+public static Pose3d camPoseRobotSpace = LimelightLib.getCameraPose3d_RobotSpace(limelight);
+public static Pose3d camPose3dRobotSpace = LimelightLib.getCameraPose3d_TargetSpace(limelight);
+public static double[] camPose2dRobotSpace = LimelightLib.getCameraPose_TargetSpace(limelight);
 
 //TARGET INFO GETTERS
-public static Pose3d a_targetPose3dCamSpace = LimelightLib.getTargetPose3d_CameraSpace(aLN);
-public static double a_targetID = LimelightLib.getFiducialID(aLN);
-public static double[] a_targetColor = LimelightLib.getTargetColor(aLN);
-
-public static Pose3d f_targetPose3dCamSpace = LimelightLib.getTargetPose3d_CameraSpace(fLN);
-public static double f_targetID = LimelightLib.getFiducialID(fLN);
-public static double[] f_targetColor = LimelightLib.getTargetColor(fLN);
+public static Pose3d targetPose3dCamSpace = LimelightLib.getTargetPose3d_CameraSpace(limelight);
+public static double targetID = LimelightLib.getFiducialID(limelight);
+public static double[] targetColor = LimelightLib.getTargetColor(limelight);
 
 // Extract the position of the target from the Pose3d object
-public static Translation3d a_targetPosition = a_targetPose3dCamSpace.getTranslation();
+public static Translation3d targetPosition = targetPose3dCamSpace.getTranslation();
 
-public static Translation3d f_targetPosition = f_targetPose3dCamSpace.getTranslation();
 
 // Calculate the distance between the robot and the target using the position of the target
-double a_distance = Math.sqrt(Math.pow(a_targetPosition.getX(), 2) + Math.pow(a_targetPosition.getY(), 2) + Math.pow(a_targetPosition.getZ(), 2));
+double distance = Math.sqrt(Math.pow(targetPosition.getX(), 2) + Math.pow(targetPosition.getY(), 2) + Math.pow(targetPosition.getZ(), 2));
 
-double f_distance = Math.sqrt(Math.pow(f_targetPosition.getX(), 2) + Math.pow(f_targetPosition.getY(), 2) + Math.pow(f_targetPosition.getZ(), 2));
-
-
-
-//RANDOM OTHER SHIT GETTERS
-public static double a_pipelineIndex = LimelightLib.getCurrentPipelineIndex(aLN);
-public static double a_captureLatency = LimelightLib.getLatency_Capture(aLN);
-public static double a_pipelineLatency = LimelightLib.getLatency_Pipeline(aLN);
-
-public static double f_pipelineIndex = LimelightLib.getCurrentPipelineIndex(fLN);
-public static double f_captureLatency = LimelightLib.getLatency_Capture(fLN);
-public static double f_pipelineLatency = LimelightLib.getLatency_Pipeline(fLN);
-
-
-
-
-
+//RANDOM OTHER STUFF GETTERS
+public static double pipelineIndex = LimelightLib.getCurrentPipelineIndex(limelight);
+public static double captureLatency = LimelightLib.getLatency_Capture(limelight);
+public static double pipelineLatency = LimelightLib.getLatency_Pipeline(limelight);
 
 
   /**
@@ -129,6 +93,23 @@ public static double calculateDistance(double ty, double armAngle, double target
   //return distanceMeters;
   //distanceYards;
 
+  
+}
+
+public static void createVisionDashboard() {
+  SmartDashboard.putNumber("Latency", pipelineLatency);
+
+  if (pipelineIndex == 1) {
+    SmartDashboard.putString("Pipeline:", "Neural Net");
+  } else if (pipelineIndex == 2) {
+    SmartDashboard.putString("Pipeline:", "Apriltags");
+  } else if (pipelineIndex ==  3) {
+    SmartDashboard.putString("Pipeline:", "Color Filtering");
+  } else if (pipelineIndex == 4) {
+    SmartDashboard.putString("Pipeline:", "Driving");
+  }
+
+  
   
 }
 
