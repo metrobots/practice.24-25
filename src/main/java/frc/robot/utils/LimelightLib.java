@@ -568,6 +568,7 @@ public class LimelightLib {
         return rawDetections;
     }
 
+    @SuppressWarnings("unused")
     private static void printPoseEstimate(PoseEstimate pose) {
         if (pose == null) {
             System.out.println("No PoseEstimate available.");
