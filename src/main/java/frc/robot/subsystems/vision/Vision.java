@@ -90,9 +90,45 @@ public class Vision extends SubsystemBase {
         }
     }
 
+    /**
+     * Calculate the distance to the nearest AprilTag.
+     *
+     * @param ty       The current ty value (use a supplier)
+     * @param armAngle The current arm angle value (use a supplier)
+     * @param targetID The current target ID (use a supplier)
+     * @param type     The type of AprilTag ("speaker", "amp", "hp-station", "stage", "any")
+     * @return The distance in feet
+     */
+
     public void createVisionDashboard() {
         SmartDashboard.putNumber("Latency", pipelineLatency);
         SmartDashboard.putString("Pipeline", getPipelineName((int) pipelineIndex));
+
+        // Displaying other relevant data on the dashboard
+        SmartDashboard.putNumber("tX", tX);
+        SmartDashboard.putNumber("tY", tY);
+        SmartDashboard.putNumber("tA", tA);
+        SmartDashboard.putBoolean("tV", tV);
+
+        // Add robot pose values to SmartDashboard
+        SmartDashboard.putString("Bot Pose 3D", botPose3d.toString());
+        SmartDashboard.putString("Bot Pose Target Space", arrayToString(botPoseTargetSpace));
+        SmartDashboard.putString("Bot Pose 3D Blue", arrayToString(botPose3dBlue));
+        SmartDashboard.putString("Bot Pose 3D Red", arrayToString(botPose3dRed));
+        SmartDashboard.putString("Bot Pose 2D", botPose2d.toString());
+        SmartDashboard.putString("Bot Pose 2D Blue", botPose2dBlue.toString());
+        SmartDashboard.putString("Bot Pose 2D Red", botPose2dRed.toString());
+
+        // Add camera pose values to SmartDashboard
+        SmartDashboard.putString("Cam Pose Robot Space", camPoseRobotSpace.toString());
+        SmartDashboard.putString("Cam Pose 3D Robot Space", camPose3dRobotSpace.toString());
+        SmartDashboard.putString("Cam Pose 2D Robot Space", arrayToString(camPose2dRobotSpace));
+
+        // Add target info values to SmartDashboard
+        SmartDashboard.putString("Target Pose 3D Cam Space", targetPose3dCamSpace.toString());
+        SmartDashboard.putNumber("Target ID", targetID);
+        SmartDashboard.putString("Target Color", arrayToString(targetColor));
+        SmartDashboard.putString("Target Position", targetPosition.toString());
     }
 
     private String getPipelineName(int index) {
@@ -105,8 +141,41 @@ public class Vision extends SubsystemBase {
         }
     }
 
+    private String arrayToString(double[] array) {
+        if (array == null) return "null";
+        StringBuilder sb = new StringBuilder();
+        for (double v : array) {
+            sb.append(v).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
     @Override
     public void periodic() {
         updateValues(); // Update values periodically
     }
+
+    // Getters for the private fields
+    public double getTX() { return tX; }
+    public double getTY() { return tY; }
+    public double getTA() { return tA; }
+    public boolean isTV() { return tV; }
+    public Pose3d getBotPose3d() { return botPose3d; }
+    public double[] getBotPoseTargetSpace() { return botPoseTargetSpace; }
+    public double[] getBotPose3dBlue() { return botPose3dBlue; }
+    public double[] getBotPose3dRed() { return botPose3dRed; }
+    public double[] getBotPose() { return botPose; }
+    public Pose2d getBotPose2d() { return botPose2d; }
+    public Pose2d getBotPose2dBlue() { return botPose2dBlue; }
+    public Pose2d getBotPose2dRed() { return botPose2dRed; }
+    public Pose3d getCamPoseRobotSpace() { return camPoseRobotSpace; }
+    public Pose3d getCamPose3dRobotSpace() { return camPose3dRobotSpace; }
+    public double[] getCamPose2dRobotSpace() { return camPose2dRobotSpace; }
+    public Pose3d getTargetPose3dCamSpace() { return targetPose3dCamSpace; }
+    public double getTargetID() { return targetID; }
+    public double[] getTargetColor() { return targetColor; }
+    public Translation3d getTargetPosition() { return targetPosition; }
+    public double getPipelineIndex() { return pipelineIndex; }
+    public double getCaptureLatency() { return captureLatency; }
+    public double getPipelineLatency() { return pipelineLatency; }
 }
