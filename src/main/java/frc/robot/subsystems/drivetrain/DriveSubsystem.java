@@ -151,7 +151,7 @@ public class DriveSubsystem extends SubsystemBase {
     swerveDrivePoseEstimator.update(getHeadingPose2d, getModulePositions()); //THIS ONE UPDATES THE ESTIMATED POSE OF SWERVE
 
     double currentHeading = getHeading(); //SET HEADING ON SMARTDASHBOARD
-    SmartDashboard.putNumber("Heading", currentHeading); 
+    // SmartDashboard.putNumber("Heading", currentHeading); 
 
 
     //UPDATE ODOMETRY
@@ -166,8 +166,8 @@ public class DriveSubsystem extends SubsystemBase {
 
     //INSTRUCTIONS - PHYSICALLY TURN ALL OF THE WHEELS SO THAT THEY FACE FORWARD. THEN IN THE CONSTANT FILE SET ALL CHASSIS ANGULAR OFFSETS TO WHATEVER VALUE THE RESPECTIVE MODULE IS READING
 
-    SmartDashboard.putNumber("xPos", swerveDrivePoseEstimator.getEstimatedPosition().getX());
-    SmartDashboard.putNumber("yPos", swerveDrivePoseEstimator.getEstimatedPosition().getY());
+    // SmartDashboard.putNumber("xPos", swerveDrivePoseEstimator.getEstimatedPosition().getX());
+    // SmartDashboard.putNumber("yPos", swerveDrivePoseEstimator.getEstimatedPosition().getY());
 
     // SmartDashboard.putNumber("Front Left Module Angle:", frontLeft.getRawTurnEncoder());
     // SmartDashboard.putNumber("Front Right Module Angle:", frontRight.getRawTurnEncoder());
@@ -385,4 +385,9 @@ public class DriveSubsystem extends SubsystemBase {
   public double getTurnRate() {
     return gyro.getRate() * (DriveConstants.gyroReversed ? -1.0 : 1.0);
   }
+
+  public void recalibrateGyro() {
+    gyro.reset();
+}
+
 }

@@ -51,6 +51,11 @@ public class Vision extends SubsystemBase {
         updateValues();
     }
 
+    @Override
+    public void periodic() {
+        updateValues(); // Update values periodically
+    }
+
     private void updateValues() {
         try {
             // Coordinate values
@@ -90,17 +95,7 @@ public class Vision extends SubsystemBase {
         }
     }
 
-    /**
-     * Calculate the distance to the nearest AprilTag.
-     *
-     * @param ty       The current ty value (use a supplier)
-     * @param armAngle The current arm angle value (use a supplier)
-     * @param targetID The current target ID (use a supplier)
-     * @param type     The type of AprilTag ("speaker", "amp", "hp-station", "stage", "any")
-     * @return The distance in feet
-     */
-
-    public void createVisionDashboard() {
+    private void createVisionDashboard() {
         SmartDashboard.putNumber("Latency", pipelineLatency);
         SmartDashboard.putString("Pipeline", getPipelineName((int) pipelineIndex));
 
@@ -148,11 +143,6 @@ public class Vision extends SubsystemBase {
             sb.append(v).append(" ");
         }
         return sb.toString().trim();
-    }
-
-    @Override
-    public void periodic() {
-        updateValues(); // Update values periodically
     }
 
     // Getters for the private fields
