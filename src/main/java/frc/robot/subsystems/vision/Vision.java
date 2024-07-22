@@ -95,7 +95,7 @@ public class Vision extends SubsystemBase {
         }
     }
 
-    private void createVisionDashboard() {
+    public void createVisionDashboard() {
         SmartDashboard.putNumber("Latency", pipelineLatency);
         SmartDashboard.putString("Pipeline", getPipelineName((int) pipelineIndex));
 

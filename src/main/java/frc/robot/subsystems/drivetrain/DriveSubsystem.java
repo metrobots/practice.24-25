@@ -21,7 +21,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.utils.SwerveUtils;
 import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.DriveConstants;
@@ -140,6 +139,7 @@ public class DriveSubsystem extends SubsystemBase {
   public static double bR = rearLeft.getRawTurnEncoder();
   public static double bL = rearRight.getRawTurnEncoder();
   public static double x;
+  public static double y;
   public static Pose2d lmao;
 
   
@@ -150,6 +150,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     swerveDrivePoseEstimator.update(getHeadingPose2d, getModulePositions()); //THIS ONE UPDATES THE ESTIMATED POSE OF SWERVE
 
+    @SuppressWarnings("unused")
     double currentHeading = getHeading(); //SET HEADING ON SMARTDASHBOARD
     // SmartDashboard.putNumber("Heading", currentHeading); 
 
@@ -166,8 +167,8 @@ public class DriveSubsystem extends SubsystemBase {
 
     //INSTRUCTIONS - PHYSICALLY TURN ALL OF THE WHEELS SO THAT THEY FACE FORWARD. THEN IN THE CONSTANT FILE SET ALL CHASSIS ANGULAR OFFSETS TO WHATEVER VALUE THE RESPECTIVE MODULE IS READING
 
-    // SmartDashboard.putNumber("xPos", swerveDrivePoseEstimator.getEstimatedPosition().getX());
-    // SmartDashboard.putNumber("yPos", swerveDrivePoseEstimator.getEstimatedPosition().getY());
+    x = swerveDrivePoseEstimator.getEstimatedPosition().getX();
+    y = swerveDrivePoseEstimator.getEstimatedPosition().getY();
 
     // SmartDashboard.putNumber("Front Left Module Angle:", frontLeft.getRawTurnEncoder());
     // SmartDashboard.putNumber("Front Right Module Angle:", frontRight.getRawTurnEncoder());
