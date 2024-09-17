@@ -16,7 +16,7 @@ public final class Main {
 
 
   /**
-   * Main initialization function. Do not perform any initialization here.
+   * Main initialization function. Do not perform any initialization here. Please and thanks
    *
    * <p>If you change your main robot class, change the parameter type.
    */
